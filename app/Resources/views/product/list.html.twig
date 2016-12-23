@@ -1,0 +1,35 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}
+   Produits en stock
+{% endblock %}
+        
+{% block body %}
+    
+    <h1>Produits en stock</h1>
+
+    {% if products %}
+        {% for product in products %}
+            <div class="col-xs-3">
+                <a href="{{ path('product', { 'reference': product.reference }) }}">
+                    <img width="100%" src="{{ asset('img/' ~ product.photo) }}">
+                </a>
+                <h3 style="text-align: center;"><a href="{{ path('product', { 'reference': product.reference }) }}">{{ product.name }} - {{ product.price }}€</a>
+                    {% if app.session.get('isAuth') and app.session.get('role') == 2 %}
+                    <a class="dropdown">
+                        <a href="#" class="dropdown-toggle pull-right" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-shopping-cart"></i><span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                        {% for cart in carts %}
+                            <li><a href="{{ path('addproductcart', { 'productId': product.id , 'cartId': cart.id }) }}">Panier {{ cart.id }}</a></li>
+                        {% endfor %}    
+                        </ul>
+                    </a>
+                    {% endif %}
+                </h3>
+            </div>
+        {% endfor %}
+        
+    {% else %}
+       Aucun produit disponible.
+    {% endif %}
+{% endblock %}

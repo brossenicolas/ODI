@@ -1,0 +1,42 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}
+   Panier {{ cart.id }}
+{% endblock %}
+        
+{% block body %}
+    
+    <h1>Panier {{ cart.id }}
+    {% if cart.stateId == 1 %}
+    	<a href="{{ path('validatecart', { 'cartId': cart.id }) }}" class="btn btn-default">Valider</a>
+   	{% endif %}
+    </h1>
+
+    {% if cart.stateId == 2 %}
+        Le panier est en cours de traitement.
+    {% elseif cart.stateId == 3 %}
+        Le panier est traité.
+    {% endif %}
+
+    {% if products %}
+    <table class="table table-striped" id='tab'>
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Prix</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for product in products %}
+            <tr>
+                <td><a href="{{ path('product', { 'reference': product.reference }) }}">{{ product.name }}</a></td>
+        		<td>{{ product.price }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+	</table>
+    {% else %}
+    Le panier est vide.
+    {% endif %}
+
+{% endblock %}

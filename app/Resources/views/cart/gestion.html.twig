@@ -1,0 +1,38 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}
+   Gestion paniers
+{% endblock %}
+        
+{% block body %}
+
+    {% for flash_message in app.session.flashBag.get('notice') %}
+        <div class="alert alert-danger alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            {{ flash_message }}
+        </div>
+    {% endfor %}
+    
+    <h1>Gestion des paniers</h1>
+
+    {% if carts %}
+    <table class="table table-striped" id='tab'>
+        <thead>
+            <tr>
+                <th>Panier</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for cart in carts %}
+            <tr>
+                <td><a href="{{ path('cart', { 'id': cart.id }) }}">Panier {{ cart.id }}</a></td>
+                <td><a href="{{ path('treatcart', { 'cartId': cart.id }) }}" class="btn btn-default pull-right">Traiter</a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    Aucun panier disponible.
+    {% endif %}
+
+{% endblock %}

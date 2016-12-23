@@ -1,0 +1,37 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}
+   Mes paniers
+{% endblock %}
+        
+{% block body %}
+    
+    <h1>Paniers <a href="{{ path('addcart') }}" class="btn btn-default">Créer un panier</a></h1>
+
+    {% if carts %}
+    <table class="table table-striped" id='tab'>
+        <thead>
+            <tr>
+                <th>Panier</th>
+                <th>Etat</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for cart in carts %}
+            <tr>
+                <td><a href="{{ path('cart', { 'id': cart.id }) }}">Panier {{ cart.id }}</a></td>
+                {% if cart.stateId == 2 %}
+                <td>En cours de traitement</td>
+                {% elseif cart.stateId == 3 %}
+                <td>Traité</td>
+                {% else %}
+                <td>Non validé</td>
+                {% endif %}
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    Aucun paniers disponible.
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,43 @@
+<nav class="navbar navbar-inverse navbar-static-top">
+	<div class="container">
+		<a class="navbar-brand" href="{{ path('productlist') }}">ODI</a>
+		<ul class="nav navbar-nav"> 
+			<li>
+				<a href="{{ path('productlist') }}">Liste produits</a>
+			</li>
+			{% if app.session.get('isAuth') and app.session.get('role') == 1 %}
+			<li>
+				<a href="{{ path('addproduct') }}">Ajout produit</a>
+			</li>
+			<li>
+				<a href="{{ path('gestionproduct') }}">Gestion produits</a>
+			</li>
+			<li>
+				<a href="{{ path('gestioncart') }}">Gestion paniers</a>
+			</li>
+			<li>
+				<a href="{{ path('alert') }}">Alertes</a>
+			</li>
+			{% endif %}
+			{% if app.session.get('isAuth') and app.session.get('role') == 2 %}
+			<li>
+				<a href="{{ path('cartlist') }}">Mes Paniers</a>
+			</li>
+			{% endif %}
+		</ul>
+		<ul class="nav navbar-nav navbar-right">
+			{% if app.session.get('isAuth') %}
+			<li class="dropdown">
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ app.session.get('username') }} <span class="caret"></span></a>
+				<ul class="dropdown-menu">
+					<li><a href="{{ path('logout') }}">Se déconnecter</a></li>
+				</ul>
+			</li>
+			{% else %}
+			<li>
+				<a href="{{ path('login') }}">Se connecter</a>
+			</li>
+			{% endif %}
+		</ul>
+	</div>
+</nav>

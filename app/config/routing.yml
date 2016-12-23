@@ -1,0 +1,63 @@
+app:
+    resource: "@AppBundle/Controller/"
+    type:     annotation
+    
+productlist:
+    path: /
+    defaults: {_controller: AppBundle:Product:list}
+
+product:
+    path: product/item/{reference}
+    defaults: {_controller: AppBundle:Product:item}
+
+login:
+    path: /login
+    defaults: {_controller: AppBundle:User:login}
+
+logout:
+    path: /logout
+    defaults: {_controller: AppBundle:User:logout}
+
+addproduct:
+    path: /product/add
+    defaults: {_controller: AppBundle:Product:add}
+
+gestionproduct:
+    path: /product/gestion
+    defaults: {_controller: AppBundle:Product:gestion}
+
+updateproduct:
+    path: /product/update
+    defaults: {_controller: AppBundle:Product:update}
+
+cartlist:
+    path: /cart
+    defaults: {_controller: AppBundle:Cart:list}
+
+cart:
+    path: /cart/item/{id}
+    defaults: {_controller: AppBundle:Cart:item}  
+
+addcart:
+    path: /cart/add
+    defaults: {_controller: AppBundle:Cart:add}
+
+validatecart:
+    path: cart/validate/{cartId}
+    defaults: {_controller: AppBundle:Cart:validate}
+
+addproductcart:
+    path: /add/product/{productId}/cart/{cartId}
+    defaults: {_controller: AppBundle:Cart:addProduct}
+
+gestioncart:
+    path: /cart/gestion
+    defaults: {_controller: AppBundle:Cart:gestion}
+
+treatcart:
+    path: /cart/treat/{cartId}
+    defaults: {_controller: AppBundle:Cart:treat}
+
+alert:
+    path: /alert
+    defaults: {_controller: AppBundle:Product:alert}

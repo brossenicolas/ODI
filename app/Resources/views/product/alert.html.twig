@@ -1,0 +1,57 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}
+   Alertes
+{% endblock %}
+        
+{% block body %}
+    
+    <h1>Alertes</h1>
+
+    <h2>Stocks</h2>
+    {% if productStocks %}
+    <table class="table table-striped" id='tab'>
+        <thead>
+            <tr>
+                <th>Produit</th>
+                <th>Quantité en stock</th>
+                <th>Quantité minimale</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for productStock in productStocks %}
+            <tr>
+                <td><a href="{{ path('product', { 'reference': productStock.reference }) }}">{{ productStock.name }}</a></td>
+                <td>{{ productStock.quantityStock }}</td>
+                <td>{{ productStock.quantityMin }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    Aucune alerte pour les stocks.
+    {% endif %}
+
+    <h2>Dates</h2>
+    {% if productDates %}
+    <table class="table table-striped" id='tab'>
+        <thead>
+            <tr>
+                <th>Produit</th>
+                <th>Date de péremption</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for productDate in productDates %}
+            <tr>
+                <td><a href="{{ path('product', { 'reference': productDate.reference }) }}">{{ productDate.name }}</a></td>
+                <td>{{ productDate.expirationDate|date('Y-m-d') }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    Aucune alerte pour les dates.
+    {% endif %}
+
+{% endblock %}

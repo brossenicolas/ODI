@@ -1,0 +1,39 @@
+AppBundle\Entity\Product:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\ProductRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        reference:
+            type: string
+            length: 255
+        name:
+            type: string
+            length: 255
+        description:
+            type: text
+        categoryId:
+            type: integer
+            column: category_id
+        quantityStock:
+            type: integer
+            column: quantity_stock
+        quantityMin:
+            type: integer
+            column: quantity_min
+        price:
+            type: integer
+        expirationDate:
+            type: date
+            column: expiration_date
+        photo:
+            type: string
+            length: 255
+        isVisible:
+            type: boolean
+    lifecycleCallbacks: {  }

@@ -1,0 +1,49 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}
+   Gestion produits
+{% endblock %}
+        
+{% block body %}
+    
+    <h1>Gestion des produits</h1>
+
+    {% if products %}
+    <table class="table table-striped" id='tab'>
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Reference</th>
+                <th>Prix</th>
+                <th>Quantité</th>
+                <th>Quantité Min.</th>
+                <th>Date d'expiration</th>
+                <th>Visible</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for product in products %}
+            <tr>
+                <form method="post" action="{{ path('updateproduct') }}">
+                    <td><a href="{{ path('product', { 'reference': product.reference }) }}">{{ product.name }}</a></td>
+                    <td>{{ product.reference }}<input type="hidden" class="form-control" name="reference" value="{{ product.reference }}"></td>
+                    <td><input type="number" class="form-control" name="price" value="{{ product.price }}"></td>
+                    <td><input type="number" class="form-control" name="quantityStock" value="{{ product.quantityStock }}"></td>
+                    <td><input type="number" class="form-control" name="quantityMin" value="{{ product.quantityMin }}"></td>
+                    <td><input type="date" class="form-control" name="expirationDate" value="{{ product.expirationDate|date('Y-m-d') }}"></td>
+                    {% if product.isVisible %}
+                    <td><input type="checkbox" class="form-control" name="isVisible" checked></td>
+                    {% else %}
+                    <td><input type="checkbox" class="form-control" name="isVisible"></td>
+                    {% endif %}
+                    <td><input type="submit" class="btn btn-default" value="Modifier"/></td>
+                </form>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+        
+    {% else %}
+       Aucun produit disponible.
+    {% endif %}
+{% endblock %}
